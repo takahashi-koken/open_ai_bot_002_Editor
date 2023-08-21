@@ -73,8 +73,8 @@ document.addEventListener("keydown", function(e) {
 """
 
 #テキスト入力
-st.write("修正したい文章を入力してください。入力後は [Ctrl]＋[Enter]")
-user_input = st.text_area("メッセージを入力してください。", key="user_input" , on_change=communicate)
+st.write("修正したい文章を入力してください。")
+user_input = st.text_area("メッセージを入力してください。入力後は [Ctrl]＋[Enter]", key="user_input" , on_change=communicate)
 
 if st.session_state["messages"]:
     messages = st.session_state["messages"]
