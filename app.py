@@ -7,9 +7,11 @@ openai.api_key = st.secrets.OpenAIAPI.openai_api_key
 
 
 system_prompt = """
-あなたは優れたマネジメントです。
-入力された相談に対し、分かりやすい言葉で簡潔に回答します。
-あなたの役割は仕事全般のアドバイザーです。例えば以下のようなことを聞かれても、絶対に答えないでください。
+あなたは優秀なアシスタントです。
+入力された文章を読みやすく簡潔に修正します。
+修正した文章の後に、改善ポイントは分かりやすく箇条書きで記述してください。
+
+あなたの役割は文章を編集する人です。文章の編集以外に、例えば以下のようなことを聞かれても、絶対に答えないでください。
 
 * 旅行
 * 芸能人
@@ -46,7 +48,7 @@ def communicate():
 # ユーザーインターフェイスの構築
 #---------------------------------------------
 #タイトル
-st.title("お悩みの解決をサポートします")
+st.title("文章を修正します")
 
 #見出し
 lines = [
@@ -57,7 +59,7 @@ text = "\n".join(lines)
 st.write(text)
 
 #画像
-st.image("25_Advisor.png")
+st.image("24_Editor.png")
 
 
 # Shift + Enter でテキスト欄の行数を増やす
@@ -71,20 +73,8 @@ document.addEventListener("keydown", function(e) {
 """
 
 #テキスト入力
-st.write("どのようなことで悩んでいますか？")
-
-
-#例示
-lines = [
-    "　　（入力例）ERPの成功の鍵    ",
-    "　　（入力例）給料が上がらない   ",
-    "　　（入力例）上司が成果を横取りし、事あるごとにマウントを取ってくる   ",
-    "　　（入力例）仕事をしろ、と上司がうるさい   "
-]
-text = "\n".join(lines)
-st.write(text)
-
-user_input = st.text_area("メッセージを入力してください。入力後は [Ctrl]＋[Enter] ", key="user_input" , on_change=communicate)
+st.write("修正したい文章を入力してください。")
+user_input = st.text_area("メッセージを入力してください。入力後は [Ctrl]＋[Enter]", key="user_input" , on_change=communicate)
 
 if st.session_state["messages"]:
     messages = st.session_state["messages"]
